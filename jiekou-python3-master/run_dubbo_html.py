@@ -6,7 +6,7 @@ from Public.py_Html import createHtml
 from Public.get_excel import datacel
 from Public.Dingtalk import send_ding
 def start_dubbo_case():
-    starttime=datetime.datetime.now()
+    starttime=datetime.datetime.now() #获取时间 格式为：2019-06-26 21:08:22.383494
     day= time.strftime("%Y%m%d%H%M", time.localtime(time.time()))
     basdir=os.path.abspath(os.path.dirname(__file__))
     path = os.getcwd() + '\\test_case_data\\dubbocase.xlsx'

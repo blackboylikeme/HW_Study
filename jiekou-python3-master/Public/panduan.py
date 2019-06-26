@@ -6,8 +6,8 @@ from .log import LOG,logger
 @logger('断言测试结果')
 def assert_in(asserqiwang,fanhuijson):
     if len(asserqiwang.split('=')) > 1:
-        data = asserqiwang.split('&')
-        result = dict([(item.split('=')) for item in data])
+        data = asserqiwang.split('&') #期望值可能出现多种&连接的值
+        result = dict([(item.split('=')) for item in data]) #高级语法
         value1=([(str(res(fanhuijson,key))) for key in result.keys()])
         value2=([(str(value)) for value in result.values()])
         if value1==value2:

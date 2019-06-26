@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # @Author  : leizi
+# @Notes   : liuyiteng
 import os,datetime,time
 from testCase.case import testinterface
 from Public.py_Html import createHtml
@@ -11,7 +12,7 @@ def start_interface_html_http():
     day= time.strftime("%Y%m%d%H%M", time.localtime(time.time()))
     basdir=os.path.abspath(os.path.dirname(__file__))
     path = os.getcwd() + '\\test_case_data\\case.xlsx'
-    listid, listkey, listconeent, listurl, listfangshi, listqiwang, listname = datacel(path)
+    listid, listkey, listconeent, listurl, listfangshi, listqiwang, listname = datacel(path)#返回各表格列列名 
     listrelust, list_fail, list_pass, list_json,list_exption,list_weizhi = testinterface()
     filepath =os.path.join(basdir+'\\test_Report\\%s-result.html'%day)
     if os.path.exists(filepath) is False:

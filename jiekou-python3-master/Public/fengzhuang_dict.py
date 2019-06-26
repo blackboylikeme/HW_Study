@@ -4,7 +4,7 @@
 @time: 2018/6/15 13:54 
 """
 '''字典取值'''
-def res(d,code):
+def res(d,code): #d：response的json类型   code：期望code 
     result=[]
     if isinstance(d, dict) and code in d.keys():
         value = d[code]

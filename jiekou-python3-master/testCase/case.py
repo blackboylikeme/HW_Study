@@ -2,6 +2,7 @@
 # @Time    : 2017/6/4 20:15
 # @Author  : lileilei
 # @File    : case.py
+# @Notes   : liuyiteng
 from Interface.testFengzhuang import TestApi
 from Public.get_excel import datacel
 from Public.log import LOG, logger
@@ -20,23 +21,23 @@ def testinterface():
     list_exption = 0
     error_num=0
     for i in range(len(listurl)):
-        while error_num<=Config_Try_Num+1:
-            api = TestApi(url=TestPlanUrl+listurl[i], key=listkey[i], connent=listconeent[i], fangshi=listfangshi[i])
+        while error_num<=Config_Try_Num+1: #当错误次数超过3次时，终止循环
+            api = TestApi(url=TestPlanUrl+listurl[i], key=listkey[i], content=listconeent[i], fangshi=listfangshi[i])
             apijson = api.getJson()
             if apijson['code'] == 0:
                 LOG.info('inputdata> 参数:%s, url:%s ,返回:%s,预期:%s' % (listconeent[i], listurl[i], apijson, listqiwang[i]))
                 assert_re = assert_in(asserqiwang=listqiwang[i], fanhuijson=apijson)
-                if assert_re['code'] == 0:
+                if assert_re['code'] == 0: #断言成功
                     list_json.append(apijson['result'])
                     listrelust.append('pass')
                     list_pass += 1
-                    error_num=0
+                    error_num=0 
                     continue
-                elif assert_re['code'] == 1:
-                    if error_num <=Config_Try_Num:
+                elif assert_re['code'] == 1: #断言失败
+                    if error_num <=Config_Try_Num: 
                         error_num+=1
                         LOG.info('失败重试中')
-                    else:
+                    else: #失败3次跳出循环
                         LOG.info('失败重试中次数用完，最后结果')
                         error_num=0
                         list_fail += 1
